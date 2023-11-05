@@ -143,22 +143,20 @@ export const uploadRecipe = async function (newRecipe) {
           description,
         };
       });
-    console.log(ingredients);
 
     const recipe = {
-      title: newRecipe.title, //
-      publisher: newRecipe.publisher, //
-      source_url: newRecipe.sourceUrl, //
-      image_url: newRecipe.image, //
-      servings: +newRecipe.servings, //
-      cooking_time: +newRecipe.cookingTime, //
-      ingredients, //
+      title: newRecipe.title,
+      publisher: newRecipe.publisher,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      servings: +newRecipe.servings,
+      cooking_time: +newRecipe.cookingTime,
+      ingredients,
     };
 
     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
-    console.log(data);
   } catch (err) {
     throw err;
   }
