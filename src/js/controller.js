@@ -9,9 +9,10 @@ import addRecipeView from './views/addRecipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
+/**
+ * @file controller.js is the root file for this forkify app
+ * @author Anirudh Dutta
+ */
 
 /////////////////////////////////////////
 const controlRecipes = async function () {

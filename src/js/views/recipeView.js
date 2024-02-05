@@ -7,10 +7,26 @@ class RecipeView extends View {
   _message = '';
   _errorMessage = 'We could not find the recipe. Please try another one!';
 
+  /**
+   * PUBLISHER - adding event handlers to render content when the hash of the URL changes or when page loads.
+   *
+   * This method attaches the event listeners to the 'hashchange' and 'load' events on the window object
+   * and calls the provided handler function when these events occur.
+   * @param {function} handler - The callback function to execute when 'hashchange' or 'load' event occurs
+   * @returns {void}
+   */
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
+  /**
+   * PUBLISHER - adding event handler to update 'servings' when a btn with class 'btn--update-servings' is clicked.
+   *
+   * This method attaches a click event handler to the '_parentElement' and using event delegation checks if the clicked element is a btn with class 'btn--update-servings'.
+   * If true, it extracts the dataset property 'updateTo' from the element and passes it into handler function
+   * @param {function} handler - The callback function to execute when there's a 'click' event on 'btn--update-servings' btn
+   * @returns {void}
+   */
   addHandlerUpdateServings(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--update-servings');
@@ -24,6 +40,14 @@ class RecipeView extends View {
     });
   }
 
+  /**
+   * PUBLISHER - adding event handler to update bookmarks when a btn with class 'btn--bookmark' is clicked.
+   *
+   * This method attaches a click event handler to the '_parentElement' and using event delegation checks if the clicked element is a btn with class 'btn--bookmark'.
+   * If true, the handler functiion is called.
+   * @param {function} handler - The callback function to execute when there's a 'click' event on 'btn--bookmark' btn
+   * @returns {void}
+   */
   addHandlerAddBookmark(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--bookmark');
@@ -32,6 +56,12 @@ class RecipeView extends View {
     });
   }
 
+  /**
+   * Generating markup(string) to be added in DOM to render a recipe in user interface
+   *
+   * @returns {string} - To be used by the 'render' & 'update' method to render content on user interface
+   * @this {Object} - View instance
+   */
   _generateMarkup() {
     return `<figure class="recipe__fig">
     <img src="${this._data.image}" alt="${
@@ -121,6 +151,12 @@ class RecipeView extends View {
   </div>`;
   }
 
+  /**
+   * Generating markup(string) for the list of ingredients in the recipe one by one
+   *
+   * @param {Object} ing - The data to be rendered
+   * @returns {string} - The markup for 1 ingredient to be rendered on the user interface
+   */
   _generateMarkupIngredients(ing) {
     return `
     <li class="recipe__ingredient">
